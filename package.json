@@ -1,0 +1,64 @@
+{
+  "name": "@careerday-jobs/react-paginator",
+  "version": "0.1.0",
+  "description": "Simple and easy-to-use pagination library for React",
+  "files": [
+    "assets",
+    "dist"
+  ],
+  "main": "dist/cjs/index.js",
+  "module": "dist/esm/index.js",
+  "scripts": {
+    "build": "rm -rf dist/ && npm run build:esm && npm run build:cjs",
+    "build:esm": "tsc",
+    "build:cjs": "tsc --module CommonJS --outDir dist/cjs"
+  },
+  "author": "Kunho Kim",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/careerday-jobs/react-paginator.git"
+  },
+  "keywords": [
+    "react.js",
+    "pagination",
+    "paginator"
+  ],
+  "contributors": [
+    {
+      "name": "Kunho Kim",
+      "email": "kh.kim@careerday.jobs",
+      "url": "https://github.com/kunhokimcareerday"
+    },
+    {
+      "name": "Hyeonu Kim",
+      "email": "hw.kim@careerday.jobs",
+      "url": "https://github.com/starseeder0309"
+    },
+    {
+      "name": "Hyojin Kim",
+      "email": "hj.kim@careerday.jobs",
+      "url": "https://github.com/hyojin961"
+    }
+  ],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/careerday-jobs/react-paginator/issues"
+  },
+  "homepage": "https://github.com/careerday-jobs/react-paginator#readme",
+  "devDependencies": {
+    "@types/node": "^18.7.18",
+    "@types/react": "^18.0.20",
+    "@types/react-dom": "^18.0.6",
+    "@types/uuid": "^8.3.4",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "typescript": "^4.8.3"
+  },
+  "dependencies": {
+    "react-hook-form": "^7.36.0",
+    "uuid": "^9.0.0"
+  },
+  "engines": {
+    "node": ">=16.0.0"
+  }
+}
