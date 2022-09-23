@@ -114,9 +114,8 @@ PaginatedParam constructor requires four parameters like below.
  
 ## ⏳ Pagination Library On Backend
 
-Looking for a library which supports pagination on backend? 
-
-[Node-paginator](https://github.com/careerday-jobs/node-paginator) is worthing trying!
+Looking for a library which supports pagination on backend? Why don't you check out [node-paginator](https://www.npmjs.com/package/@careerday-jobs/node-paginator)
+It's way more efficient when you try both packages!
 
 ## 👨👩 Contributors
 

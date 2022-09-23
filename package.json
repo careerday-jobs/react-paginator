@@ -24,21 +24,9 @@
     "paginator"
   ],
   "contributors": [
-    {
-      "name": "Kunho Kim",
-      "email": "kh.kim@careerday.jobs",
-      "url": "https://github.com/kunhokimcareerday"
-    },
-    {
-      "name": "Hyeonu Kim",
-      "email": "hw.kim@careerday.jobs",
-      "url": "https://github.com/starseeder0309"
-    },
-    {
-      "name": "Hyojin Kim",
-      "email": "hj.kim@careerday.jobs",
-      "url": "https://github.com/hyojin961"
-    }
+    "Kunho Kim <kh.kim@careerday.jobs> (https://github.com/kunhokimcareerday)",
+    "Hyeonu Kim <hw.kim@careerday.jobs> (https://github.com/starseeder0309)",
+    "Hyojin Kim <hj.kim@careerday.jobs> (https://github.com/hyojin961)"
   ],
   "license": "MIT",
   "bugs": {
@@ -60,5 +48,6 @@
   },
   "engines": {
     "node": ">=16.0.0"
-  }
+  },
+  "types": "./dist/cjs/index.d.ts"
 }

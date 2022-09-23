@@ -2,8 +2,8 @@ import { useState, useCallback, SetStateAction, Dispatch } from 'react';
 import PaginatedParam from '../types/paginatedParam';
 
 function usePaginated(
-  pageSize?: number,
-  pageNumberSplitSize?: number
+  pageSize: number,
+  selectablePageNumRange: number
 ): [
   PaginatedParam,
   Dispatch<SetStateAction<PaginatedParam>>,
@@ -11,14 +11,9 @@ function usePaginated(
   number[]
 ] {
   const [paginated, setPaginated] = useState(
-    new PaginatedParam(
-      undefined,
-      pageSize,
-      undefined,
-      undefined,
-      pageNumberSplitSize
-    )
+    new PaginatedParam(1, pageSize, 0, selectablePageNumRange)
   );
+
   const [selectablePageNums, setSelectablePageNums] = useState([1]);
 
   const createPages = (
@@ -43,18 +38,22 @@ function usePaginated(
     return pages;
   };
 
-  const redrawPaginated = useCallback((newPaginated: PaginatedParam) => {
+  const drawPaginated = useCallback((newPaginated: PaginatedParam) => {
+    const totalPageNo = Math.ceil(
+      newPaginated.totalItemCount / newPaginated.pageSize
+    );
+
     setPaginated(newPaginated);
     setSelectablePageNums(
       createPages(
         newPaginated.pageNo,
-        newPaginated.totalPageNo,
+        totalPageNo,
         newPaginated.pageNumbersSplitSize
       )
     );
   }, []);
 
-  return [paginated, setPaginated, redrawPaginated, selectablePageNums];
+  return [paginated, setPaginated, drawPaginated, selectablePageNums];
 }
 
 export default usePaginated;
