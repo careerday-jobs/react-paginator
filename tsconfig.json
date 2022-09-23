@@ -13,7 +13,19 @@
     "outDir": "dist/esm",
     "sourceMap": true,
     "strict": true,
-    "target": "es6"
+    "target": "es6",
+    /* "inlineSourceMap": true, */
+    "strictNullChecks": true,
+    "strictFunctionTypes": true,
+    "strictPropertyInitialization": true,
+    "noImplicitThis": true,
+    "alwaysStrict": true,
+    "noUnusedParameters": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "resolveJsonModule": true,
+    "forceConsistentCasingInFileNames": true,
+    "plugins": [{ "name": "typescript-plugin-css-modules" }]
   },
   "include": ["src/**/*.ts", "src/**/*.tsx"]
 }

@@ -132,6 +132,16 @@ PaginatedCommander component requires four parameters like below.
 
       For now there are only two locales are supported: 'en' and 'ko'.
 
+## 🖼️ Styling
+
+Styling can be achieved by just importing css file provided. CDN version will be provided in the future.
+
+```css
+/* Example */
+@import '../node_modules/@careerday-jobs/react-paginator/lib/paginated.css';
+```
+
+
 ## ⏳ Pagination Library On Backend
 
 Looking for a library which supports pagination on backend? Why don't you check out [node-paginator](https://www.npmjs.com/package/@careerday-jobs/node-paginator)?
