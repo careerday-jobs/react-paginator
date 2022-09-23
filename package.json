@@ -3,15 +3,18 @@
   "version": "0.1.8",
   "description": "Simple and easy-to-use pagination library for React",
   "files": [
-    "assets",
     "dist"
   ],
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
   "scripts": {
+    "clean": "rm -rf ./lib",
+    "prebuild": "npm run clean",
     "build": "rm -rf dist/ && npm run build:esm && npm run build:cjs",
     "build:esm": "tsc",
-    "build:cjs": "tsc --module CommonJS --outDir dist/cjs && cp src/paginated.css dist/esm"
+    "build:cjs": "tsc --module CommonJS --outDir dist/cjs",
+    "copy-files": "copyfiles -u 1 -E -V  \"src/components/atoms/icons/images/**/*\" \"src/style/assets/**/*.otf\"  \"src/style/base.css\" \"src/**/*.*css\" lib/",
+    "postbuild": "npm run copy-files"
   },
   "author": "Kunho Kim",
   "repository": {
