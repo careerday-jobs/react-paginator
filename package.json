@@ -11,7 +11,7 @@
   "scripts": {
     "build": "rm -rf dist/ && npm run build:esm && npm run build:cjs",
     "build:esm": "tsc",
-    "build:cjs": "tsc --module CommonJS --outDir dist/cjs"
+    "build:cjs": "tsc --module CommonJS --outDir dist/cjs && cp src/paginated.css dist/esm"
   },
   "author": "Kunho Kim",
   "repository": {
