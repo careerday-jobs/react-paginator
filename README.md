@@ -99,19 +99,39 @@ PaginatedParam constructor requires four parameters like below.
 
 * **pageSize** ```number```
 
-      The size of each page.
-
 * **totalItemCount** ```number```
 
       The number of whole items.
 
 * **selectablePageNumberRange** ```number```
 
-      The range of page numbers you can see. 
-      For example, if selectablePageNumberRange is 5, 
-      you will see page numbers like 1, 2, 3, 4, 5 when you're on the 1st page.
-      And you will see 6, 7, 8, 9, 10 when you're on the 7th page.
+
+### PaginatedCommander (React component)
+
+PaginatedCommander component requires four parameters like below.
+
+* **paginated**
+
+      paginated variable you got from usePaginated() 
+
+* **setPaginated**
+
+      setPaginated variable you got from usePaginated() 
+
+* **selectablePageNums**
+
+      selectablePageNums variable you got from usePaginated()
+
+* **dataFetchFunction**
+
+      The callback you want to use to fetch data.
+      Please note that you should call drawPaginated() function
+      after data gets prepared.
  
+* **locale**
+
+      For now there are only two locales are supported: 'en' and 'ko'.
+
 ## ⏳ Pagination Library On Backend
 
 Looking for a library which supports pagination on backend? Why don't you check out [node-paginator](https://www.npmjs.com/package/@careerday-jobs/node-paginator)?
