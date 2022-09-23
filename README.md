@@ -112,13 +112,13 @@ PaginatedParam constructor requires four parameters like below.
       you will see page numbers like 1, 2, 3, 4, 5 when you're on the 1st page.
       And you will see 6, 7, 8, 9, 10 when you're on the 7th page.
  
-## Pagination Library On Backend
+## ⏳ Pagination Library On Backend
 
 Looking for a library which supports pagination on backend? 
 
 [Node-paginator](https://github.com/careerday-jobs/node-paginator) is worthing trying!
 
-## Contributors
+## 👨👩 Contributors
 
 <a href="https://github.com/kunhokimcareerday"><img src="https://avatars.githubusercontent.com/u/89354853?v=4" title="Kunho Kim" width="80" height="80">
 @kunhokimcareerday </a>
