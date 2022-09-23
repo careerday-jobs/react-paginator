@@ -2,7 +2,7 @@ import React, { Dispatch, SetStateAction } from 'react';
 import { useForm } from 'react-hook-form';
 import PaginatedParam from '../types/paginatedParam';
 
-interface Props {
+export interface Props {
   /** 'paginated' from usePaginated() call */
   paginated: PaginatedParam;
   /** 'setPaginated' from usePaginated() call */
