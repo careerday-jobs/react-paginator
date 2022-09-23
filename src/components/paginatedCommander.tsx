@@ -1,6 +1,6 @@
 import React, { Dispatch, SetStateAction } from 'react';
-import PaginatedParam from '../types/paginatedParam';
 import { useForm } from 'react-hook-form';
+import PaginatedParam from '../types/paginatedParam';
 
 interface Props {
   /** 'paginated' from usePaginated() call */
@@ -48,11 +48,13 @@ const PaginatedCommander: React.FC<Props> = ({
   locale,
 }) => {
   const textsGroup: PaginatedTextsGroup = getTextsGroup(locale);
+  const totalPageNo = Math.ceil(paginated.totalItemCount / paginated.pageSize);
+  const pageNo = Math.max(0, Math.min(paginated.pageNo, totalPageNo));
 
   const getPreviousPageSplitStartPage = () =>
     Math.max(
       Math.floor(
-        (paginated.pageNo - 1 - paginated.pageNumbersSplitSize) /
+        (pageNo - 1 - paginated.pageNumbersSplitSize) /
           paginated.pageNumbersSplitSize
       ) *
         paginated.pageNumbersSplitSize +
@@ -63,33 +65,33 @@ const PaginatedCommander: React.FC<Props> = ({
   const getNextPageSplitStartPage = () =>
     Math.min(
       Math.floor(
-        (paginated.pageNo - 1 + paginated.pageNumbersSplitSize) /
+        (pageNo - 1 + paginated.pageNumbersSplitSize) /
           paginated.pageNumbersSplitSize
       ) *
         paginated.pageNumbersSplitSize +
         1,
-      paginated.totalPageNo
+      totalPageNo
     );
 
   const { setValue, register, handleSubmit } = useForm({
-    defaultValues: { pageNo: paginated.pageNo },
+    defaultValues: { pageNo: pageNo },
   });
 
   return (
     <div className="paginated-commander">
-      {paginated?.totalItemNo > 0 && (
+      {paginated?.totalItemCount > 0 && (
         <div className="paginated-commander-body">
           <div className="header-total">
-            <span className="mobile-total-items">{`${textsGroup.totalPrefix}: ${paginated.totalItemNo} ${textsGroup.totalPostfix}`}</span>
+            <span className="mobile-total-items">{`${textsGroup.totalPrefix}: ${paginated.totalItemCount} ${textsGroup.totalPostfix}`}</span>
           </div>
           <div key={paginated.key} className="mobile-body">
             <div className="mobile-body-items">
               <button
                 onClick={(e) => {
                   e.preventDefault();
-                  if (paginated.pageNo - 1 > 0) {
-                    void dataFetchFunction(paginated.pageNo - 1);
-                    setValue('pageNo', paginated.pageNo - 1);
+                  if (pageNo - 1 > 0) {
+                    void dataFetchFunction(pageNo - 1);
+                    setValue('pageNo', pageNo - 1);
                   }
                 }}
                 className="mobile-prev-button"
@@ -98,10 +100,7 @@ const PaginatedCommander: React.FC<Props> = ({
               </button>
               <form
                 onSubmit={handleSubmit((value) => {
-                  if (
-                    value?.pageNo >= 1 &&
-                    value?.pageNo <= paginated.totalPageNo
-                  ) {
+                  if (value?.pageNo >= 1 && value?.pageNo <= totalPageNo) {
                     void dataFetchFunction(value.pageNo);
                   }
                 })}
@@ -115,15 +114,15 @@ const PaginatedCommander: React.FC<Props> = ({
                     autoComplete="off"
                   ></input>
                   <div className="slash">{`/`}</div>
-                  <div className="total-page-no">{`${paginated.totalPageNo}`}</div>
+                  <div className="total-page-no">{`${totalPageNo}`}</div>
                 </div>
               </form>
               <button
                 onClick={(e) => {
                   e.preventDefault();
-                  if (paginated.pageNo + 1 <= paginated.totalPageNo) {
-                    void dataFetchFunction(paginated.pageNo + 1);
-                    setValue('pageNo', paginated.pageNo + 1);
+                  if (pageNo + 1 <= totalPageNo) {
+                    void dataFetchFunction(pageNo + 1);
+                    setValue('pageNo', pageNo + 1);
                   }
                 }}
                 className="mobile-next-button"
@@ -135,23 +134,23 @@ const PaginatedCommander: React.FC<Props> = ({
               <div />
               <div className="desktop-body-items">
                 <div className="total-page-no">
-                  {`${textsGroup.totalPrefix} ${paginated.totalItemNo} ${
+                  {`${textsGroup.totalPrefix} ${paginated.totalItemCount} ${
                     textsGroup.totalPostfix
                   } / ${
-                    paginated.pageSize * (paginated.pageNo - 1) + 1
+                    paginated.pageSize * (pageNo - 1) + 1
                   } - ${Math.min(
-                    paginated.pageSize * paginated.pageNo,
-                    paginated.totalItemNo
+                    paginated.pageSize * pageNo,
+                    paginated.totalItemCount
                   )}`}
                 </div>
                 <button
                   onClick={(e) => {
                     e.preventDefault();
-                    if (paginated.pageNo - 1 > 0) {
+                    if (pageNo - 1 > 0) {
                       void dataFetchFunction(getPreviousPageSplitStartPage());
                     }
                   }}
-                  disabled={paginated.pageNo === 1}
+                  disabled={pageNo === 1}
                   className="prev-page-button"
                 >
                   <span className="sr-only">이전</span>
@@ -174,11 +173,11 @@ const PaginatedCommander: React.FC<Props> = ({
                   <button
                     onClick={(e) => {
                       e.preventDefault();
-                      if (paginated.pageNo - 1 > 0) {
+                      if (pageNo - 1 > 0) {
                         void dataFetchFunction(getPreviousPageSplitStartPage());
                       }
                     }}
-                    disabled={paginated.pageNo === 1}
+                    disabled={pageNo === 1}
                     className="pages-hidden-button"
                   >
                     ...
@@ -193,7 +192,7 @@ const PaginatedCommander: React.FC<Props> = ({
                       return dataFetchFunction(pageElemNo);
                     }}
                     className={
-                      pageElemNo === paginated.pageNo
+                      pageElemNo === pageNo
                         ? 'page-number-button selected-page-button'
                         : 'page-number-button'
                     }
@@ -201,11 +200,11 @@ const PaginatedCommander: React.FC<Props> = ({
                     {pageElemNo}
                   </button>
                 ))}
-                {!selectablePageNums.includes(paginated.totalPageNo) && (
+                {!selectablePageNums.includes(totalPageNo) && (
                   <button
                     onClick={(e) => {
                       e.preventDefault();
-                      if (paginated.pageNo + 1 <= paginated.totalPageNo) {
+                      if (pageNo + 1 <= totalPageNo) {
                         void dataFetchFunction(getNextPageSplitStartPage());
                       }
                     }}
@@ -214,27 +213,27 @@ const PaginatedCommander: React.FC<Props> = ({
                     ...
                   </button>
                 )}
-                {!selectablePageNums.includes(paginated.totalPageNo) && (
+                {!selectablePageNums.includes(totalPageNo) && (
                   <button
-                    key={`page-${paginated.totalPageNo}`}
+                    key={`page-${totalPageNo}`}
                     aria-current="page"
                     onClick={(e) => {
                       e.preventDefault();
-                      return dataFetchFunction(paginated.totalPageNo);
+                      return dataFetchFunction(totalPageNo);
                     }}
                     className="pages-hidden-button"
                   >
-                    {paginated.totalPageNo}
+                    {totalPageNo}
                   </button>
                 )}
                 <button
                   onClick={(e) => {
                     e.preventDefault();
-                    if (paginated.pageNo + 1 <= paginated.totalPageNo) {
+                    if (pageNo + 1 <= totalPageNo) {
                       void dataFetchFunction(getNextPageSplitStartPage());
                     }
                   }}
-                  disabled={paginated.pageNo === paginated.totalPageNo}
+                  disabled={pageNo === totalPageNo}
                   className="next-page-button"
                 >
                   <span className="sr-only">Next Page</span>
