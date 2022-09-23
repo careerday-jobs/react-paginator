@@ -1,7 +1,7 @@
 import { useState, useCallback, SetStateAction, Dispatch } from 'react';
 import { PaginatedParam } from '../types';
 
-function usePaginated(
+export function usePaginated(
   pageSize: number,
   selectablePageNumRange: number
 ): [
@@ -55,5 +55,3 @@ function usePaginated(
 
   return [paginated, setPaginated, drawPaginated, selectablePageNums];
 }
-
-export default usePaginated;
