@@ -1,6 +1,6 @@
 import React, { Dispatch, SetStateAction } from 'react';
 import { useForm } from 'react-hook-form';
-import PaginatedParam from '../types/paginatedParam';
+import { PaginatedParam } from '../types';
 
 export interface Props {
   /** 'paginated' from usePaginated() call */
@@ -41,7 +41,7 @@ const getTextsGroup = (localStr?: string) => {
   }
 };
 
-const PaginatedCommander: React.FC<Props> = ({
+export const PaginatedCommander: React.FC<Props> = ({
   paginated,
   selectablePageNums,
   dataFetchFunction,
@@ -247,4 +247,3 @@ const PaginatedCommander: React.FC<Props> = ({
     </div>
   );
 };
-export default PaginatedCommander;

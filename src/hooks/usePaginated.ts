@@ -1,5 +1,5 @@
 import { useState, useCallback, SetStateAction, Dispatch } from 'react';
-import PaginatedParam from '../types/paginatedParam';
+import { PaginatedParam } from '../types';
 
 function usePaginated(
   pageSize: number,
