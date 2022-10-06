@@ -138,7 +138,7 @@ Styling can be achieved by just importing css file provided. CDN version will be
 
 ```css
 /* Example */
-@import '../node_modules/@careerday-jobs/react-paginator/lib/paginated.css';
+@import '@careerday-jobs/react-paginator/lib/paginated.css';
 ```
 
 
