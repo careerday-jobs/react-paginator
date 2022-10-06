@@ -1,6 +1,6 @@
 {
   "name": "@careerday-jobs/react-paginator",
-  "version": "0.1.10",
+  "version": "0.1.11",
   "description": "Simple and easy-to-use pagination library for React",
   "files": [
     "dist",
