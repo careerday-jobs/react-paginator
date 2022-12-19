@@ -49,7 +49,7 @@ export const PaginatedCommander: React.FC<Props> = ({
 }) => {
   const textsGroup: PaginatedTextsGroup = getTextsGroup(locale);
   const totalPageNo = Math.ceil(paginated.totalItemCount / paginated.pageSize);
-  const pageNo = Math.max(0, Math.min(paginated.pageNo, totalPageNo));
+  const pageNo = Math.max(1, Math.min(paginated.pageNo, totalPageNo));
 
   const getPreviousPageSplitStartPage = () =>
     Math.max(
