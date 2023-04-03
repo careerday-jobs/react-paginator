@@ -13,6 +13,8 @@ export interface Props {
   dataFetchFunction: (pageNo: number) => Promise<void>;
   /** Your language. For now only 'en' and 'ko' are supported. */
   locale?: string;
+  /** Pagination UI. Default pagination if not set to 'true' */
+  isMobile?: boolean;
 }
 
 interface PaginatedTextsGroup {
@@ -46,6 +48,7 @@ export const PaginatedCommander: React.FC<Props> = ({
   selectablePageNums,
   dataFetchFunction,
   locale,
+  isMobile = false,
 }) => {
   const textsGroup: PaginatedTextsGroup = getTextsGroup(locale);
   const totalPageNo = Math.ceil(paginated.totalItemCount / paginated.pageSize);
@@ -79,12 +82,13 @@ export const PaginatedCommander: React.FC<Props> = ({
 
   return (
     <div className="paginated-commander">
-      {paginated?.totalItemCount > 0 && (
+      {isMobile && paginated?.totalItemCount > 0 && (
         <div className="paginated-commander-body">
           <div className="header-total">
             <span className="mobile-total-items">{`${textsGroup.totalPrefix}: ${paginated.totalItemCount} ${textsGroup.totalPostfix}`}</span>
           </div>
           <div key={paginated.key} className="mobile-body">
+            {/* mobile */}
             <div className="mobile-body-items">
               <button
                 onClick={(e) => {
@@ -130,15 +134,23 @@ export const PaginatedCommander: React.FC<Props> = ({
                 {getTextsGroup(locale).next}
               </button>
             </div>
+          </div>
+        </div>
+      )}
+      {!isMobile && paginated?.totalItemCount > 0 && (
+        <div className="paginated-commander-body">
+          <div className="header-total">
+            <span className="mobile-total-items">{`${textsGroup.totalPrefix}: ${paginated.totalItemCount} ${textsGroup.totalPostfix}`}</span>
+          </div>
+          <div key={paginated.key} className="mobile-body">
+            {/* pc */}
             <div className="desktop-body">
               <div />
               <div className="desktop-body-items">
                 <div className="total-page-no">
                   {`${textsGroup.totalPrefix} ${paginated.totalItemCount} ${
                     textsGroup.totalPostfix
-                  } / ${
-                    paginated.pageSize * (pageNo - 1) + 1
-                  } - ${Math.min(
+                  } / ${paginated.pageSize * (pageNo - 1) + 1} - ${Math.min(
                     paginated.pageSize * pageNo,
                     paginated.totalItemCount
                   )}`}
@@ -153,7 +165,7 @@ export const PaginatedCommander: React.FC<Props> = ({
                   disabled={pageNo === 1}
                   className="prev-page-button"
                 >
-                  <span className="sr-only">이전</span>
+                  <span className="sr-only">Prev Page</span>
                   {'<'}
                 </button>
                 {!selectablePageNums.includes(1) && (
