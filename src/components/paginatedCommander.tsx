@@ -15,6 +15,10 @@ export interface Props {
   locale?: string;
   /** Pagination UI. Default pagination if not set to 'true' */
   isMobile?: boolean;
+  /** Whether total amount is showing */
+  isTotalAmountShow?: boolean;
+  /** Whether it's sticky like a footer */
+  isStickyFooter?: boolean;
 }
 
 interface PaginatedTextsGroup {
@@ -49,6 +53,8 @@ export const PaginatedCommander: React.FC<Props> = ({
   dataFetchFunction,
   locale,
   isMobile = false,
+  isTotalAmountShow = true,
+  isStickyFooter= false,
 }) => {
   const textsGroup: PaginatedTextsGroup = getTextsGroup(locale);
   const totalPageNo = Math.ceil(paginated.totalItemCount / paginated.pageSize);
@@ -84,10 +90,12 @@ export const PaginatedCommander: React.FC<Props> = ({
     <div className="paginated-commander">
       {isMobile && paginated?.totalItemCount > 0 && (
         <div className="paginated-commander-body">
-          <div className="header-total">
-            <span className="mobile-total-items">{`${textsGroup.totalPrefix}: ${paginated.totalItemCount} ${textsGroup.totalPostfix}`}</span>
-          </div>
-          <div key={paginated.key} className="mobile-body">
+          {isTotalAmountShow && (
+            <div className="header-total">
+              <span className="mobile-total-items">{`${textsGroup.totalPrefix}: ${paginated.totalItemCount} ${textsGroup.totalPostfix}`}</span>
+            </div>
+          )}
+          <div key={paginated.key} className={"mobile-body" + (isStickyFooter ? ' sticky-footer' : ' normal')}>
             {/* mobile */}
             <div className="mobile-body-items">
               <button

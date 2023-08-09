@@ -12,7 +12,7 @@
   line-height: 1rem;
 }
 
-.paginated-commander .mobile-body {
+.paginated-commander .mobile-body.normal {
   display: flex;
   padding: 0.75rem 1rem;
   background-color: #ffffff;
@@ -21,6 +21,18 @@
   border-radius: 0.5rem;
   border-width: 1px;
   border-color: #e5e7eb;
+}
+
+.paginated-commander .mobile-body.sticky-footer {
+  display: flex;
+  padding: 0.75rem 1rem;
+  background-color: #ffffff;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom-left-radius: 0.5rem;
+  border-bottom-right-radius: 0.5rem;
+  border-color: #e5e7eb;
+  border-top: 1px solid #e5e7eb;
 }
 
 .paginated-commander .mobile-body .mobile-body-items {
