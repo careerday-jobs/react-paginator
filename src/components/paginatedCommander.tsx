@@ -48,14 +48,14 @@ const getTextsGroup = (localStr?: string) => {
 };
 
 export const PaginatedCommander: React.FC<Props> = ({
-  paginated,
-  selectablePageNums,
-  dataFetchFunction,
-  locale,
-  isMobile = false,
-  isTotalAmountShow = true,
-  isStickyFooter= false,
-}) => {
+                                                      paginated,
+                                                      selectablePageNums,
+                                                      dataFetchFunction,
+                                                      locale,
+                                                      isMobile = false,
+                                                      isTotalAmountShow = true,
+                                                      isStickyFooter = false,
+                                                    }) => {
   const textsGroup: PaginatedTextsGroup = getTextsGroup(locale);
   const totalPageNo = Math.ceil(paginated.totalItemCount / paginated.pageSize);
   const pageNo = Math.max(1, Math.min(paginated.pageNo, totalPageNo));
@@ -64,10 +64,10 @@ export const PaginatedCommander: React.FC<Props> = ({
     Math.max(
       Math.floor(
         (pageNo - 1 - paginated.pageNumbersSplitSize) /
-          paginated.pageNumbersSplitSize
+        paginated.pageNumbersSplitSize
       ) *
-        paginated.pageNumbersSplitSize +
-        paginated.pageNumbersSplitSize,
+      paginated.pageNumbersSplitSize +
+      paginated.pageNumbersSplitSize,
       0
     );
 
@@ -75,10 +75,10 @@ export const PaginatedCommander: React.FC<Props> = ({
     Math.min(
       Math.floor(
         (pageNo - 1 + paginated.pageNumbersSplitSize) /
-          paginated.pageNumbersSplitSize
+        paginated.pageNumbersSplitSize
       ) *
-        paginated.pageNumbersSplitSize +
-        1,
+      paginated.pageNumbersSplitSize +
+      1,
       totalPageNo
     );
 
@@ -95,7 +95,12 @@ export const PaginatedCommander: React.FC<Props> = ({
               <span className="mobile-total-items">{`${textsGroup.totalPrefix}: ${paginated.totalItemCount} ${textsGroup.totalPostfix}`}</span>
             </div>
           )}
-          <div key={paginated.key} className={"mobile-body" + (isStickyFooter ? ' sticky-footer' : ' normal')}>
+          <div
+            key={paginated.key}
+            className={
+              'mobile-body' + (isStickyFooter ? ' sticky-footer' : ' normal')
+            }
+          >
             {/* mobile */}
             <div className="mobile-body-items">
               <button
@@ -147,10 +152,17 @@ export const PaginatedCommander: React.FC<Props> = ({
       )}
       {!isMobile && paginated?.totalItemCount > 0 && (
         <div className="paginated-commander-body">
-          <div className="header-total">
-            <span className="mobile-total-items">{`${textsGroup.totalPrefix}: ${paginated.totalItemCount} ${textsGroup.totalPostfix}`}</span>
-          </div>
-          <div key={paginated.key} className="mobile-body">
+          {isTotalAmountShow && (
+            <div className="header-total">
+              <span className="mobile-total-items">{`${textsGroup.totalPrefix}: ${paginated.totalItemCount} ${textsGroup.totalPostfix}`}</span>
+            </div>
+          )}
+          <div
+            key={paginated.key}
+            className={
+              'mobile-body' + (isStickyFooter ? ' sticky-footer' : ' normal')
+            }
+          >
             {/* pc */}
             <div className="desktop-body">
               <div />
